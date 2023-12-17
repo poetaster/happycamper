@@ -29,7 +29,7 @@ Page {
                 WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
             }
 
-            url: Qt.resolvedUrl("../html/rainviewer-api.html")
+            url: Qt.resolvedUrl("https://bandcamp.com")
 
             onViewInitialized: {
                 //webview.loadFrameScript(Qt.resolvedUrl("../html/framescript.js"));

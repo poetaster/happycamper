@@ -1,0 +1,9 @@
+[submodule "lib/campdown"]
+	path = lib/campdown
+	url = https://github.com/poetaster/campdown
+[submodule "lib/mutagen"]
+	path = lib/mutagen
+	url = https://github.com/poetaster/mutagen
+[submodule "lib/docopt"]
+	path = lib/docopt
+	url = https://github.com/poetaster/docopt

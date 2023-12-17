@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import io.thp.pyotherside 1.4
+import Nemo.DBus 2.0
+
 import "pages"
 
 ApplicationWindow {
@@ -9,8 +11,30 @@ ApplicationWindow {
     allowedOrientations: defaultAllowedOrientations
 
 
+    DBusAdaptor {
+        id: dbus
+        bus: DBus.SessionBus
+        service: 'de.poetaster.happycamper'
+        iface: 'de.poetaster.happycamper'
+        path: '/de.poetaster.happycamper'
+        xml: '<interface name="de.poetaster.happycamper">
+               <method name="openUrl">
+                 <arg name="url" type="s" direction="in">
+                   <doc:doc><doc:summary>url to open</doc:summary></doc:doc>
+                 </arg>
+               </method>
+             </interface>'
+        function openUrl(u) {
+            console.log("openUrl called via DBus:" + u)
+            MainPage.setUrl(u)
+        }
+    }
+
     Python {
         id: py
+
+        property var notificationObj
+
         Component.onCompleted: {
             addImportPath(Qt.resolvedUrl('../lib/'));
             importModule('happy', function () {});
@@ -24,11 +48,19 @@ ApplicationWindow {
                 //py.createTmpAndSaveFolder( )
                 //py.deleteAllTMPFunction(tempAudioFolderPath)
             });
+
             setHandler('warningCamperNotAvailable', function() {
                 warningNoPydub = true
             });
+
             setHandler('campError', function() {
                 console.log('error')
+            });
+
+            setHandler('downloadCompleted', function() {
+                //console.log('error')
+                notificationObj: pageStack.currentPage.notification
+                notificationObj.notify("Download completed")
             });
 
             setHandler('deletedFile', function() {

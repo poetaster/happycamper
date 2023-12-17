@@ -59,3 +59,6 @@ def downLoad(url,directory):
         e = sys.exc_info()[0]
         pyotherside.send('campError', e )
 
+
+    pyotherside.send('downloadCompleted', "True" )
+

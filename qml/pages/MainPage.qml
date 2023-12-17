@@ -5,11 +5,15 @@ import Sailfish.WebEngine 1.0
 
 Page {
     id: mainpage
-
+     property alias notification: popup
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
+
+    function setUrl(url){
+        webview.url = Qt.resolvedUrl(url)
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -24,14 +28,25 @@ Page {
 
             }
         }
+        Popup {
+            id: popup
+            z: 10
+
+            timeout: 3000
+
+            padding: page.paddingSmall
+
+            defaultColor: page.secondaryHighlightColor
+            labelMargin: page.paddingSmall
+        }
 
         WebView {
             id: webview
             anchors.fill: parent
             /* This will probably be required from 4.4 on. */
             Component.onCompleted: {
-                WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
-                WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
+                //WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
+                //WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
             }
 
             url: Qt.resolvedUrl("https://das-das.bandcamp.com")

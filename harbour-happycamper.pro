@@ -19,12 +19,16 @@ DISTFILES += qml/harbour-happycamper.qml \
     qml/cover/CoverPage.qml \
     qml/pages/MainPage.qml \
     qml/pages/Settings.qml \
+    qml/pages/Popup.qml \
     lib/*.py \
     rpm/harbour-happycamper.changes.in \
     rpm/harbour-happycamper.changes.run.in \
     rpm/harbour-happycamper.spec \
     translations/*.ts \
-    harbour-happycamper.desktop
+    dbus-1/services/* \
+    50-harbour-happycamper.conf \
+    harbour-happycamper.desktop \
+    harbour-happycamper-open-url.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

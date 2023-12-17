@@ -16,6 +16,10 @@ URL:        https://github.com/poetaster/happycamper
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
+Requires(pre): systemd
+Requires(preun): systemd
+Requires(post): systemd
+Requires(postun): systemd
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -61,7 +65,16 @@ Url:
 %qmake5 
 
 %make_build
+%install
 
+rm -rf %{buildroot}
+# >> install pre
+%__install -D -m 644 %{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
+%__install -D -m 644 %{name}-open-url.desktop %{buildroot}%{_datadir}/applications/%{name}-open-url.desktop
+%__install -D -m 644 50-%{name}.conf %{buildroot}%{_userunitdir}/user-session.target.d/50-%{name}.conf
+for f in $(find dbus-1/ -type f -print); do
+%__install -D -m 644 $f %{buildroot}%{_datadir}/${f}
+done
 
 %install
 %qmake5_install
@@ -90,9 +103,24 @@ rm -rf %{buildroot}/%{_datadir}/%{name}/bin
 
 cd %_builddir
 
+%preun
+# >> preun
+%systemd_preun booster-browser@%{name}.service
+# << preun
+%post
+# >> post
+%systemd_post booster-browser@%{name}.service
+# << post
+%postun
+# >> postun
+%systemd_postun booster-browser@%{name}.service
+# << postun
+
 %files
 %defattr(-,root,root,-)
 %defattr(0644,root,root,-)
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_userunitdir}/user-session.target.d/50-%{name}.conf
+%{_datadir}/dbus-1/services/*

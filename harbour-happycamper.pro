@@ -26,16 +26,22 @@ DISTFILES += qml/harbour-happycamper.qml \
     rpm/harbour-happycamper.spec \
     translations/*.ts \
     dbus-1/services/* \
-    50-harbour-happycamper.conf \
     harbour-happycamper.desktop \
-    harbour-happycamper-open-url.desktop
+    rpm/harbour-happycamper-open-url.desktop \
+    rpm/50-harbour-happycamper.conf \
+    rpm/dbus-1/services/* \
+
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 libs.path = /usr/share/$${TARGET}
 libs.files = lib
 
+dbus.path = /usr/share/share/dbus-1/services/
+dbus.files = rpm/dbus-1/services
+
 INSTALLS += libs
+INSTALLS += dbus
 
 # to disable building translations every time, comment out the
 # following CONFIG line

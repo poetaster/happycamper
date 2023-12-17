@@ -18,6 +18,11 @@ Page {
                 text: qsTr("Settings")
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("Settings.qml"))
             }
+            MenuItem {
+                text: qsTr("Download")
+                onClicked: py.download(webview.url.toString(),'/home/defaultuser/Music/')
+
+            }
         }
 
         WebView {
@@ -29,7 +34,7 @@ Page {
                 WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
             }
 
-            url: Qt.resolvedUrl("https://bandcamp.com")
+            url: Qt.resolvedUrl("https://das-das.bandcamp.com")
 
             onViewInitialized: {
                 //webview.loadFrameScript(Qt.resolvedUrl("../html/framescript.js"));

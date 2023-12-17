@@ -7,3 +7,6 @@
 [submodule "lib/docopt"]
 	path = lib/docopt
 	url = https://github.com/poetaster/docopt
+[submodule "lib/requests"]
+	path = lib/requests
+	url = https://github.com/poetaster/requests

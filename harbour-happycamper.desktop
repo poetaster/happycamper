@@ -13,4 +13,4 @@ OrganizationName=de.poetaster
 # ApplicationName does not have to be identical to Name
 ApplicationName=happycamper
 # Add the required permissions here
-Permissions=Internet;MediaIndexing;Music;RemovableMedia;UserDirs
+Permissions=Internet;Audio;MediaIndexing;Music;RemovableMedia;UserDirs

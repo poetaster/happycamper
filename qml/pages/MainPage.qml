@@ -6,7 +6,8 @@ import Nemo.DBus 2.0
 
 Page {
     id: mainpage
-     property alias notification: popup
+    property alias notification: popup
+
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
@@ -37,26 +38,45 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
         PullDownMenu {
-            MenuItem {
+            /*MenuItem {
                 text: qsTr("Settings")
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("Settings.qml"))
+            }*/
+            MenuItem {
+                text: qsTr("About")
+                onClicked: pageStack.animatorPush(Qt.resolvedUrl("About.qml"))
+
+            }
+            MenuItem {
+                text: qsTr("Back")
+                onClicked:
+                    if (webview.canGoBack)
+                        webview.goBack()
+
             }
             MenuItem {
                 text: qsTr("Download")
-                onClicked: py.download(webview.url.toString(),'/home/defaultuser/Music/')
+                onClicked: {
+                    notification.notify("Download starting...")
+                    py.download(webview.url.toString(),'/home/defaultuser/Music/')
+
+                }
+            }
+        }
+        PushUpMenu {
+            MenuItem {
+                text: qsTr("Forward")
+                onClicked:
+                    if (webview.canGoForward)
+                        webview.goForward()
 
             }
         }
         Popup {
             id: popup
             z: 10
-
             timeout: 3000
-
-            padding: mainpage.paddingSmall
-
-            defaultColor: mainpage.secondaryHighlightColor
-            labelMargin: mainpage.paddingSmall
+            padding: Theme.paddingLarge
         }
 
         WebView {
@@ -84,6 +104,7 @@ Page {
 
             onRecvAsyncMessage: {
                 if (debug) console.debug(message)
+                popup.notify(message)
                 //webview.runJavaScript("return latlon('" + lat + "','" + lon + "')");
                 /*
                 switch (message) {

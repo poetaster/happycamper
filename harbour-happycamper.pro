@@ -17,6 +17,7 @@ CONFIG += sailfishapp_qml
 DISTFILES += qml/harbour-happycamper.qml \
     lib/happy.py \
     qml/cover/CoverPage.qml \
+    qml/pages/About.qml \
     qml/pages/MainPage.qml \
     qml/pages/Settings.qml \
     qml/pages/Popup.qml \
@@ -26,9 +27,7 @@ DISTFILES += qml/harbour-happycamper.qml \
     rpm/harbour-happycamper.spec \
     translations/*.ts \
     harbour-happycamper.desktop \
-    rpm/harbour-happycamper-open-url.desktop \
-    rpm/50-harbour-happycamper.conf \
-    rpm/*.service \
+    harbour-happycamper-open-url.desktop
 
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
@@ -37,6 +36,11 @@ libs.path = /usr/share/$${TARGET}
 libs.files = lib
 
 INSTALLS += libs
+
+desktop2.path += /usr/share/applications
+desktop2.files = $${TARGET}-open-url.desktop
+
+INSTALLS += desktop2
 
 # to disable building translations every time, comment out the
 # following CONFIG line

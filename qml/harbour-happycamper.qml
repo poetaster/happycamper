@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import io.thp.pyotherside 1.4
 import Nemo.DBus 2.0
@@ -6,17 +6,18 @@ import Nemo.DBus 2.0
 import "pages"
 
 ApplicationWindow {
-    initialPage: Component { MainPage { } }
+    initialPage: Component { MainPage { }  }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
+   property var notificationObj
+   notificationObj: pageStack.currentPage.notification
 
 
 
     Python {
         id: py
 
-        property var notificationObj
 
         Component.onCompleted: {
             addImportPath(Qt.resolvedUrl('../lib/'));
@@ -42,7 +43,6 @@ ApplicationWindow {
 
             setHandler('downloadCompleted', function() {
                 //console.log('error')
-                notificationObj: pageStack.currentPage.notification
                 notificationObj.notify("Download completed")
             });
 

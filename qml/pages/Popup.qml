@@ -13,13 +13,11 @@ MouseArea {
 
     property alias title: message.text
     property alias timeout: hideTimer.interval
-    property alias background: bg.color
-
-    property color defaultColor: Theme.highlightColor
-    property color textColor: "white"
+    property color defaultColor: "cyan" //Theme.lightPrimaryColor
+    property color textColor: "black"
 
     property real rectOpacity: 0.9
-    property int pixelSize: 32
+    property int pixelSize: 48
 
     visible: opacity > 0
     opacity: 0.0

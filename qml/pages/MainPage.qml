@@ -30,7 +30,7 @@ Page {
              </interface>'
         function openUrl(u) {
             console.log("openUrl called via DBus:" + u)
-            webview.url = Qt.resolvedUrl(u)
+            webview.url = Qt.resolvedUrl(u.toString())
             //mainpage.setUrl(u)
         }
     }

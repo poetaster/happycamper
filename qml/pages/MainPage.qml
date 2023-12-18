@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.WebView 1.0
 import Sailfish.WebEngine 1.0
+import Nemo.DBus 2.0
 
 Page {
     id: mainpage
@@ -14,7 +15,25 @@ Page {
     function setUrl(url){
         webview.url = Qt.resolvedUrl(url)
     }
-
+    DBusAdaptor {
+        id: dbus
+        bus: DBus.SessionBus
+        service: 'de.poetaster.happycamper'
+        iface: 'de.poetaster.happycamper'
+        path: '/de/poetaster/happycamper'
+        xml: '<interface name="de.poetaster.happycamper">
+               <method name="openUrl">
+                 <arg name="url" type="s" direction="in">
+                   <doc:doc><doc:summary>url to open</doc:summary></doc:doc>
+                 </arg>
+               </method>
+             </interface>'
+        function openUrl(u) {
+            console.log("openUrl called via DBus:" + u)
+            webview.url = Qt.resolvedUrl(u)
+            //mainpage.setUrl(u)
+        }
+    }
     SilicaFlickable {
         anchors.fill: parent
         PullDownMenu {
@@ -34,10 +53,10 @@ Page {
 
             timeout: 3000
 
-            padding: page.paddingSmall
+            padding: mainpage.paddingSmall
 
-            defaultColor: page.secondaryHighlightColor
-            labelMargin: page.paddingSmall
+            defaultColor: mainpage.secondaryHighlightColor
+            labelMargin: mainpage.paddingSmall
         }
 
         WebView {

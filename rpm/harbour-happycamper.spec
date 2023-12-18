@@ -79,13 +79,13 @@ Url:
 %install
 rm -rf %{buildroot}
 # >> install pre
-install -D -m0644 %{SOURCE1}  %{_tmppath}/
-install -D -m0644 %{SOURCE2}  %{_tmppath}/
-install -D -m0644 %{SOURCE3}  %{_tmppath}/
+#install -D -m0644 %{SOURCE1}  %{_tmppath}/
+#install -D -m0644 %{SOURCE2}  %{_tmppath}/
+#install -D -m0644 %{SOURCE3}  %{_tmppath}/
 
-install -p %{_tmppath}/%{name}-open-url.desktop %{buildroot}%{_datadir}/applications/%{name}-open-url.desktop
-install -p %{_tmppath}/50-%{name}.conf %{buildroot}%{_userunitdir}/user-session.target.d/50-%{name}.conf
-install -p %{_tmppath}/de.poetaster.happycamper.service %{buildroot}%{_datadir}/de.poetaster.happycamper.service
+install -D -m0644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}-open-url.desktop
+install -D -m0644 %{SOURCE2} %{buildroot}%{_userunitdir}/user-session.target.d/50-%{name}.conf
+install -D -m0644 %{SOURCE3} %{buildroot}%{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 # << install pre
 %qmake5_install
 
@@ -132,7 +132,7 @@ cd %_builddir
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-%{_datadir}/dbus-1/services/*
+%{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 %{_datadir}/applications/%{name}*.desktop
 %{_datadir}/applications/%{name}-open-url.desktop
 %{_userunitdir}/user-session.target.d/50-%{name}.conf

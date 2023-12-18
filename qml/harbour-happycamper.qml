@@ -11,24 +11,7 @@ ApplicationWindow {
     allowedOrientations: defaultAllowedOrientations
 
 
-    DBusAdaptor {
-        id: dbus
-        bus: DBus.SessionBus
-        service: 'de.poetaster.happycamper'
-        iface: 'de.poetaster.happycamper'
-        path: '/de.poetaster.happycamper'
-        xml: '<interface name="de.poetaster.happycamper">
-               <method name="openUrl">
-                 <arg name="url" type="s" direction="in">
-                   <doc:doc><doc:summary>url to open</doc:summary></doc:doc>
-                 </arg>
-               </method>
-             </interface>'
-        function openUrl(u) {
-            console.log("openUrl called via DBus:" + u)
-            MainPage.setUrl(u)
-        }
-    }
+
 
     Python {
         id: py

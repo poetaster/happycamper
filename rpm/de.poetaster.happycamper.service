@@ -1,2 +1,3 @@
 [D-BUS Service] 
-Name=de.poetaster.happycamper Exec=/usr/bin/invoker -s --type=generic /usr/bin/sailjail -p harbour-happycamper.desktop /usr/bin/sailfish-qml harbour-happycamper
+Name=de.poetaster.happycamper
+Exec=/usr/bin/invoker -s --type=generic /usr/bin/sailjail -p harbour-happycamper.desktop /usr/bin/sailfish-qml harbour-happycamper

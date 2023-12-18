@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Icon=harbour-happycamper
-Name=Happy
+Name=Happycamper
 MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
 X-Maemo-Service=de.poetaster.happycamper
 X-Maemo-Object-Path=/de/poetaster/happycamper

@@ -4,8 +4,11 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-happycamper
 Exec=sailfish-qml harbour-happycamper
 Name=Happycamper
-MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
-X-Maemo-Method=de.poetaster.happycamper.openUrl
+#MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
+#X-Maemo-Service=de.poetaster.happycamper
+#X-Maemo-Object-Path=/
+#X-Maemo-Method=de.poetaster.happycamper.openUrl
+
 # translation example:
 # your app name in German locale (de)
 #
@@ -14,9 +17,10 @@ X-Maemo-Method=de.poetaster.happycamper.openUrl
 Name[de]=Happycamper
 
 [X-Sailjail]
+Sandboxing=Disabled
 # Replace with your organization as a reverse domain name
-OrganizationName=de.poetaster
+#OrganizationName=de.poetaster
 # ApplicationName does not have to be identical to Name
-ApplicationName=Happycamper
+#ApplicationName=Happycamper
 # Add the required permissions here
-Permissions=Internet;MediaIndexing;Music;RemovableMedia;UserDirs
+#Permissions=Internet;MediaIndexing;Music;RemovableMedia;UserDirs

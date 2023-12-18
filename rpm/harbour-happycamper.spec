@@ -19,15 +19,13 @@ Source2:    50-harbour-happycamper.conf
 Source3:    dbus-1/services/de.poetaster.happycamper.service
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
-Requires(pre): systemd
-Requires(preun): systemd
-Requires(post): systemd
-Requires(postun): systemd
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(qt5embedwidget)
+BuildRequires:  pkgconfig(sailfishwebengine)
 BuildRequires:  qt5-qttools-linguist
 
 %if "%{?vendor}" == "chum"
@@ -125,6 +123,5 @@ cd %_builddir
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}*.desktop
-%{_datadir}/applications/%{name}-open-url.desktop
 # >> files
 # << files

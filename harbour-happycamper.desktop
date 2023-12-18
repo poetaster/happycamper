@@ -2,7 +2,7 @@
 Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-happycamper
-Exec=sailfish-qml harbour-happycamper
+Exec=sailfish-qml harbour-happycamper %u
 Name=Happycamper
 Name[de]=Happycamper
 #X-DBusActivatable=true

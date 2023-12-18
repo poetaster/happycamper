@@ -14,9 +14,6 @@ License:    GPLv3
 BuildArch:  noarch
 URL:        https://github.com/poetaster/happycamper
 Source0:    %{name}-%{version}.tar.bz2
-Source1:    harbour-happycamper-open-url.desktop
-Source2:    50-harbour-happycamper.conf
-Source3:    dbus-1/services/de.poetaster.happycamper.service
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
@@ -49,10 +46,6 @@ DeveloperName: Mark Washeim (poetaster)
 Custom:
  - Repo: https://github.com/poetaster/happycamper
 Icon: https://raw.githubusercontent.com/poetaster/happycamper/main/icons/172x172/harbour-happycamper.png
-Screenshots:
- - https://raw.githubusercontent.com/poetaster/harbour-happycamper/main/screenshot-1.png
- - https://raw.githubusercontent.com/poetaster/harbour-happycamper/main/screenshot-2.png
- - https://raw.githubusercontent.com/poetaster/harbour-happycamper/main/screenshot-3.png
 Url:
   Donation: https://www.paypal.me/poetasterFOSS
 %endif
@@ -77,8 +70,6 @@ Url:
 %install
 rm -rf %{buildroot}
 # >> install pre
-#install -D -m0644 %{SOURCE1}  %{_tmppath}/
-#install -D -m0644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}-open-url.desktop
 # << install pre
 %qmake5_install
 

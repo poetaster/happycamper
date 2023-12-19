@@ -8,7 +8,7 @@ Name:       harbour-happycamper
 # << macros
 
 Summary:    Happy Camper Bandcamp Downloader.
-Version:    0.1.1
+Version:    0.1.2
 Release:    1
 License:    GPLv3
 BuildArch:  noarch
@@ -79,17 +79,9 @@ rm -rf %{buildroot}
 
 desktop-file-install --delete-original         --dir %{buildroot}%{_datadir}/applications                %{buildroot}%{_datadir}/applications/*.desktop
 
-#cd %{buildroot}%{_datadir}/%{name}/lib/requests
-#python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
-#rm -rf  %{buildroot}%{_datadir}/%{name}/lib/requests
-
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
 rm -rf %{buildroot}/%{_datadir}/%{name}/lib/docopt
-
-#cd %{buildroot}/%{_datadir}/%{name}/lib/mutagen
-#python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
-#rm -rf %{buildroot}/%{_datadir}/%{name}/lib/mutagen
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/campdown
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/

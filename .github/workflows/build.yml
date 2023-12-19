@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
     - name: Prepare
       run: docker pull coderus/sailfishos-platform-sdk:$OS_VERSION && mkdir output
 

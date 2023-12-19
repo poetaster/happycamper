@@ -16,6 +16,9 @@ URL:        https://github.com/poetaster/happycamper
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
+Requires:    python3-urllib3
+Requires:    python3-requests
+Requires:    python3-mutagen
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -76,17 +79,17 @@ rm -rf %{buildroot}
 
 desktop-file-install --delete-original         --dir %{buildroot}%{_datadir}/applications                %{buildroot}%{_datadir}/applications/*.desktop
 
-cd %{buildroot}%{_datadir}/%{name}/lib/requests
-python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
-rm -rf  %{buildroot}%{_datadir}/%{name}/lib/requests
+#cd %{buildroot}%{_datadir}/%{name}/lib/requests
+#python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
+#rm -rf  %{buildroot}%{_datadir}/%{name}/lib/requests
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
 rm -rf %{buildroot}/%{_datadir}/%{name}/lib/docopt
 
-cd %{buildroot}/%{_datadir}/%{name}/lib/mutagen
-python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
-rm -rf %{buildroot}/%{_datadir}/%{name}/lib/mutagen
+#cd %{buildroot}/%{_datadir}/%{name}/lib/mutagen
+#python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
+#rm -rf %{buildroot}/%{_datadir}/%{name}/lib/mutagen
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/campdown
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/

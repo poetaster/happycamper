@@ -10,16 +10,22 @@ ApplicationWindow {
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
+   property bool debug: false
    property var notificationObj
    notificationObj: pageStack.currentPage.notification
+   property var musicFolder: StandardPaths.MusicLocation
 
-
+   MainHandler {
+     id: main_handler
+   }
 
     Python {
         id: py
 
-
         Component.onCompleted: {
+
+            console.log(musicFolder)
+
             addImportPath(Qt.resolvedUrl('../lib/'));
             importModule('happy', function () {});
 
@@ -33,59 +39,58 @@ ApplicationWindow {
                 //py.deleteAllTMPFunction(tempAudioFolderPath)
             });
 
-            setHandler('warningCamperNotAvailable', function() {
-                warningNoPydub = true
-            });
-
-            setHandler('campError', function() {
-                console.log('error')
-            });
-
             setHandler('downloadCompleted', function() {
-                //console.log('error')
                 notificationObj.notify("Download completed")
             });
 
-            setHandler('deletedFile', function() {
-                origAudioFilePath = ""
-                origAudioFileName = ""
-                origAudioFolderPath = ""
-                origAudioType = ""
-                origAudioName = ""
-                idAudioPlayer.source = ""
-                idImageWaveform.source = ""
-                idImageWaveformZoom.source = ""
-                audioLengthSecondsPython = 0
-                millisecondsPerPixelPython = 0
-                showTools = false
-            });
             setHandler('copiedToClipboard', function() {
                 clipboardAvailable = true
             });
+
+            setHandler('trackQueue', function(queue) {
+                console.log(queue)
+            });
+            setHandler('currentDir', function(dir) {
+                console.log(dir)
+            });
+
+            setHandler('error', error_handler);
+
+        }
+
+        function error_handler(module_id, method_id, description) {
+          console.log('Module ERROR - source:', module_id, method_id, 'error:', description);
+          //app.signal_error(module_id, method_id, description);
         }
 
         // file operations
-        function download(url,dir) {
-            call("happy.downLoad", [url,dir])
-        }
-        function getHomePath() {
-            call("happy.getHomePath", [])
+        function download_url(url,dir) {
+            call("happy.download_url", [url,dir])
         }
 
-        function deleteFile() {
-            stopPlayingResetWaveform()
-            py.deleteAllTMPFunction()
-            call("happy.deleteFile", [ origAudioFilePath ])
+        function get_media_folder_items(folder_path) {
+           return call_sync('happy.get_media_folder_items', [folder_path]);
+         }
+
+        function get_local_media(track_id, video_id) {
+          var params = []
+          if (track_id) {
+            params.push(track_id)
+            if (video_id) params.push(video_id)
+          }
+          return call_sync('happy.get_local_media', params);
         }
-        function renameOriginal() {
-            stopPlayingResetWaveform()
-            py.deleteAllTMPFunction()
-            var newFilePath = origAudioFolderPath + idFilenameRenameText.text + "." + origAudioType
-            var newFileName = idFilenameRenameText.text
-            var newFileType = origAudioType
-            call("happy.renameOriginal", [ origAudioFilePath, newFilePath, newFileName, newFileType ])
+        // this is a fint to get track info using ID3 tags.
+        function get_track_cache(media_url) {
+          return call_sync('happy.get_track_info', [media_url])
         }
 
+        function save_playlist(file_name, playlist_items) {
+          return call_sync('happy.save_playlist', [file_name, playlist_items])
+        }
+        function get_home_path() {
+            call("happy.get_home_path", [])
+        }
         onError: {
             // when an exception is raised, this error handler will be called
             console.log('python error: ' + traceback);

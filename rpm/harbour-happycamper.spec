@@ -107,5 +107,6 @@ cd %_builddir
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}*.desktop
+#%{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 # >> files
 # << files

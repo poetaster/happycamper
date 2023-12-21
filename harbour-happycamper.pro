@@ -17,10 +17,7 @@ CONFIG += sailfishapp_qml
 DISTFILES += qml/harbour-happycamper.qml \
     lib/happy.py \
     qml/cover/CoverPage.qml \
-    qml/pages/About.qml \
-    qml/pages/MainPage.qml \
-    qml/pages/Settings.qml \
-    qml/pages/Popup.qml \
+    qml/pages/*.qml \
     lib/*.py \
     rpm/harbour-happycamper.changes.in \
     rpm/harbour-happycamper.changes.run.in \
@@ -37,10 +34,17 @@ libs.files = lib
 
 INSTALLS += libs
 
+# extra desktop file for dbus
 desktop2.path += /usr/share/applications
 desktop2.files = $${TARGET}-open-url.desktop
 
 INSTALLS += desktop2
+
+# extra service file for dbus
+service.path = /usr/share/dbus-1/services
+serivce.files = de.poetaster.happycamper.service
+
+INSTALLS += service
 
 # to disable building translations every time, comment out the
 # following CONFIG line

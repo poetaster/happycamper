@@ -58,7 +58,7 @@ Page {
                 text: qsTr("Download")
                 onClicked: {
                     notification.notify("Download starting...")
-                    py.download(webview.url.toString(),'/home/defaultuser/Music/')
+                    py.download_url(webview.url.toString(),'/home/defaultuser/Music/')
 
                 }
             }
@@ -69,7 +69,10 @@ Page {
                 onClicked:
                     if (webview.canGoForward)
                         webview.goForward()
-
+            }
+            MenuItem {
+                text: qsTr("Player")
+                onClicked: pageStack.animatorPush(Qt.resolvedUrl("PlayerPage.qml"))
             }
         }
         Popup {

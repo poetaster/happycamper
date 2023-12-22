@@ -6,17 +6,26 @@ import Nemo.DBus 2.0
 import "pages"
 
 ApplicationWindow {
+    id: app
     initialPage: Component { MainPage { }  }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 
-   property bool debug: false
+   property bool debug: true
    property var notificationObj
    notificationObj: pageStack.currentPage.notification
+
    property var musicFolder: StandardPaths.MusicLocation
+
+   signal signal_error(string module_id, string method_id, string description)
+   signal signal_media_download(var media)
 
    MainHandler {
      id: main_handler
+   }
+
+   NotificationsHandler {
+     id: notifications_handler
    }
 
     Python {
@@ -48,10 +57,18 @@ ApplicationWindow {
             });
 
             setHandler('trackQueue', function(queue) {
-                console.log(queue)
+                if(debug) console.log(queue)
             });
             setHandler('currentDir', function(dir) {
-                console.log(dir)
+                musicFolder = dir
+                const local_media = py.get_media_folder_items(dir)
+                for (var i = 0; i < local_media.length; i++) {
+                  if (debug) console.log('folder_picker_page - media:', local_media[i])
+                  const track_info = py.get_track_id3(local_media[i])
+                  main_handler.add_playlist_item(local_media[i],track_info)
+                }
+                main_handler.player_artwork = dir + '/cover.jpg'
+                if (debug) console.log(dir)
             });
 
             setHandler('error', error_handler);
@@ -80,11 +97,14 @@ ApplicationWindow {
           }
           return call_sync('happy.get_local_media', params);
         }
-        // this is a fint to get track info using ID3 tags.
+        /* this is borked for obvious reasons */
         function get_track_cache(media_url) {
           return call_sync('happy.get_track_info', [media_url])
         }
-
+        // this is a fint to get track info using ID3 tags.
+        function get_track_id3(media_url) {
+          return call_sync('happy.get_track_id3', [media_url])
+        }
         function save_playlist(file_name, playlist_items) {
           return call_sync('happy.save_playlist', [file_name, playlist_items])
         }

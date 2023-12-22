@@ -47,6 +47,9 @@ DeveloperName: Mark Washeim (poetaster)
 Custom:
  - Repo: https://github.com/poetaster/happycamper
 Icon: https://raw.githubusercontent.com/poetaster/happycamper/main/icons/172x172/harbour-happycamper.png
+Screenshots:
+ - https://raw.githubusercontent.com/poetaster/harbour-happycamper/main/screen1.png
+ - https://raw.githubusercontent.com/poetaster/harbour-happycamper/main/screen2.png
 Url:
   Donation: https://www.paypal.me/poetasterFOSS
 %endif

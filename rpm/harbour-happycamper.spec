@@ -8,7 +8,7 @@ Name:       harbour-happycamper
 # << macros
 
 Summary:    Happy Camper Bandcamp Downloader.
-Version:    0.1.2
+Version:    0.1.4
 Release:    1
 License:    GPLv3
 BuildArch:  noarch

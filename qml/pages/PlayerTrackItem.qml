@@ -137,21 +137,19 @@ ListItem {
     if (track_id && !track_info) track_info = main_handler.get_track_info(track_id)    
     if (!track_info) {
       // try using our hack.
-      //const path = source.toString()
-      //const info = main_handler.get_track_id3(path.slice(7))
-      //console.log(info.track)
+      const path = source.toString()
+      const info = py.get_track_id3(path.slice(7))
+
       track_info = {
-          /*'track': info.track,
-          'album': info.album,
-          'artist':info.artist,
-          'artwork':main_handler.player_artwork,
-          'duration': null,*/
         'track': main_handler.basename(source),
         'album': '',
         'artist': '',
-        'artwork': '',
+        'artwork': main_handler.player_artwork,
         'duration': null,
       }
+      if (info['title']) track_info['track'] = info['title']
+      if (info['album']) track_info['album'] = info['album']
+      if (info['artist']) track_info['artist'] = info['artist']
 
       if (track_id) main_handler.tracks_info[track_id] = track_info
       else main_handler.tracks_info[source] = track_info

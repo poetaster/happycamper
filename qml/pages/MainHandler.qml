@@ -236,11 +236,12 @@ Item {
   function get_track_id3(media_url) {
     const track_info = py.get_track_id3(media_url)
     if (!track_info) return null;
+    console.log('main id3:', track_info['title'])
     return {
-      'track': track_info.title,
-      'album': track_info.album,
-      'artist': track_info.artist,
-      'artwork': track_info.album ? String(track_info.album.strAlbumThumbHQ || track_info.album.strAlbumThumb) : null,
+      'track': track_info['title'],
+      'album': track_info['album'],
+      'artist': track_info['artist'],
+      'artwork': track_info['album'] ? String(track_info.album.strAlbumThumbHQ || track_info.album.strAlbumThumb) : null,
       'duration': null,
     }
   }

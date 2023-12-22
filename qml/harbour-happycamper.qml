@@ -17,6 +17,8 @@ ApplicationWindow {
 
    property var musicFolder: StandardPaths.MusicLocation
 
+   property var track_volumes: {'_null': null}
+
    signal signal_error(string module_id, string method_id, string description)
    signal signal_media_download(var media)
 
@@ -32,6 +34,8 @@ ApplicationWindow {
         id: py
 
         Component.onCompleted: {
+
+            app.track_volumes["player"] = 1.0
 
             console.log(musicFolder)
 

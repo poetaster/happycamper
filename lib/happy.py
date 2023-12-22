@@ -102,15 +102,19 @@ def download_url(url,directory):
 
 def get_track_id3(path):
     print('get_track_id3:', path, 'path:', path)
+    array = {}
     try:
         track_info=MP3(path, ID3=EasyID3)
-        print(track_info)
+        # reduce the datastructure
+        for e in track_info:
+            array[e] = track_info[e][0]
+
     except Exception as err:
       print('happy track_id3 - error: ', err)
       pyotherside.send("error", "happy", "get_track_id3", format_error(err))
       return False
 
-    return track_info
+    return array
 
 def save_playlist(file_name, playlist_items):
     print('save_playlist:', file_name, 'items:', len(playlist_items))

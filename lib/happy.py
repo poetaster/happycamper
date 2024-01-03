@@ -77,22 +77,26 @@ def download_url(url,directory):
     self.album_artist = album_artist'''
 
     # save current playlist
+    '''
     playlist_items = []
     try:
+        artist_album = ""
         pl = Path(downloader.current_dir).glob('**/*.mp3')
         for path in pl:
-             audio=MP3(path, ID3=EasyID3)
-             playlist_items.append({'media_url': 'file:///' + str(path), 'track': audio['title'], 'duration':''})
+            audio=MP3(path, ID3=EasyID3)
+            playlist_items.append({'media_url': 'file:///' + str(path), 'track': audio['title'][0], 'duration':str(audio.info.length)})
+            # TODO this seems brittle
+            artist_album = str(audio['artist'][0]) + ' - ' + str(audio['album'][0])
 
-        if(len(playlist_items) > 0):
+        if ( len(playlist_items) > 0 ):
             #print(playlist_items)
-            save_playlist(downloader.current_dir + "/happycamper.pls", playlist_items)
+            save_album_playlist(downloader.current_dir + artist_album +".pls", playlist_items, artist_album)
 
     except Exception as err:
       print('happy save_playlist - error: ', err)
       pyotherside.send("error", "happy", "save_playlist", format_error(err))
       return False
-
+    '''
     # send qml side some info about the tracks and location
     # function which needs to be called before anything else can be done.
     #pyotherside.send('trackQueue', downloader.queue)
@@ -135,6 +139,26 @@ def save_playlist(file_name, playlist_items):
       print('happy save_playlist - error: ', err)
       pyotherside.send("error", "happy", "save_playlist", format_error(err))
       return False
+
+def save_album_playlist(file_name, playlist_items, album):
+      print('save_album_playlist:', file_name, 'items:', len(playlist_items), album)
+      try:
+        with open(file_name, 'w') as f:
+          f.write("[playlist]\n")
+          f.write("X-GNOME-Title="+album+"\n")
+          for index, item in enumerate(playlist_items):
+            index += 1
+            f.write("File%d=%s\n" % (index, item['media_url']))
+            f.write("Title%d=%s\n" % (index, item['track']))
+            if item['duration']:
+              f.write("Length%d=%s\n" % (index, round(item['duration'] / 1000)))
+
+          f.write("NumberOfEntries=%d\n" % len(playlist_items))
+          f.write("Version=2\n\n")
+      except Exception as err:
+        print('happy save_playlist - error: ', err)
+        pyotherside.send("error", "happy", "save_album_playlist", format_error(err))
+        return False
 
 def get_media_folder_items(folder_path, file_types = ('*.mp3', '*.opus', '*.ogg', '*.flac')):
     media_files = []

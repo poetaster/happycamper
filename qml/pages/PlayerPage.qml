@@ -8,7 +8,40 @@ Page {
 
   anchors.fill: parent
 
-  property string default_playlist_file: StandardPaths.music + '/happycamper/playlist.pls'
+  property string default_playlist_file: StandardPaths.music + '/happycamper-playlist.pls'
+
+  function save_list(){
+
+      var playlist_items = []
+      for (var i = 0; i < main_handler.playlist.itemCount; i++) {
+        const media_url = String(main_handler.playlist.itemSource(i))
+        const track_id = main_handler.media_file_to_track(media_url)
+        var track_info = main_handler.tracks_info[track_id]
+
+        if (!track_info) {
+          // try using our hack.
+          const path = media_url.toString()
+          const info = py.get_track_id3(path.slice(7))
+          console.log(path)
+
+          track_info = {
+            'track': main_handler.basename(media_url),
+            'album': '',
+            'artist': '',
+            'artwork': main_handler.player_artwork,
+            'duration': null,
+          }
+          if (info['title']) track_info['track'] = info['title']
+          if (info['album']) track_info['album'] = info['album']
+          if (info['artist']) track_info['artist'] = info['artist']
+        }
+        track_info.media_url = media_url
+        playlist_items.push(track_info)
+      }
+
+      console.log(py.save_playlist(default_playlist_file, playlist_items))
+
+  }
 
   SilicaListView {
     id: list_view
@@ -68,23 +101,16 @@ Page {
         }
       }
 
+
       MenuItem {
         visible: true
         enabled: main_handler.playlist.itemCount > 0
         text: "Save playlist"
         onClicked: {
-          var playlist_items = []
-          for (var i = 0; i < main_handler.playlist.itemCount; i++) {
-            const media_url = String(main_handler.playlist.itemSource(i))
-            const track_id = main_handler.media_file_to_track(media_url)
-            var track_info = main_handler.tracks_info[track_id]
-            if (!track_info) continue
-            track_info.media_url = media_url
-            playlist_items.push(track_info)
-          }
-          console.log(py.save_playlist(default_playlist_file, playlist_items))
+                save_list()
         }
       }
+
     }
 
     header: Item {

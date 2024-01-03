@@ -106,7 +106,7 @@ Page {
 
             onRecvAsyncMessage: {
                 if (debug) console.debug(message)
-                popup.notify(message)
+                //popup.notify(message)
                 //webview.runJavaScript("return latlon('" + lat + "','" + lon + "')");
                 /*
                 switch (message) {

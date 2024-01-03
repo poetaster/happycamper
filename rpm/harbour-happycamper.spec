@@ -93,13 +93,13 @@ rm -rf %{buildroot}/%{_datadir}/%{name}/bin
 
 cd %_builddir
 
-%preun
+#%preun
 # >> preun
 # << preun
-%post
+#%post
 # >> post
 # << post
-%postun
+#%postun
 # >> postun
 # << postun
 

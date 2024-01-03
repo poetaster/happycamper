@@ -31,7 +31,6 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 libs.path = /usr/share/$${TARGET}
 libs.files = lib
-
 INSTALLS += libs
 
 # extra desktop file for dbus

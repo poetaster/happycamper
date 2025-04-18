@@ -7,6 +7,7 @@ import Nemo.DBus 2.0
 Page {
     id: mainpage
     property alias notification: popup
+    var musicPath = StandardPaths.writableLocation(StandardPaths.MusicLocation)
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
@@ -62,7 +63,7 @@ Page {
                 text: qsTr("Download")
                 onClicked: {
                     notification.notify("Download starting...")
-                    py.download_url(webview.url.toString(),'/home/defaultuser/Music/')
+                    py.download_url(webview.url.toString(),musicPath)
                 }
             }
         }

@@ -16,7 +16,6 @@ Summary:    Happy Camper Bandcamp Downloader.
 Version:    0.1.6
 Release:    1
 License:    GPLv3
-BuildArch:  noarch
 URL:        https://github.com/poetaster/happycamper
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9

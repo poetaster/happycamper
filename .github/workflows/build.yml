@@ -20,8 +20,8 @@ jobs:
     - name: Prepare
       run: mkdir output
 
-    - name: Build noarch
-      id: build_aarch64
+    - name: Build i486 
+      id: build_i486
       uses: coderus/github-sfos-build@sfos5
       with:
         release: ${{ env.RELEASE }}

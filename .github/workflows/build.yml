@@ -25,7 +25,7 @@ jobs:
       uses: coderus/github-sfos-build@sfos5
       with:
         release: ${{ env.RELEASE }}
-        arch: noarch
+        arch: i486
       
     - name: Upload build result
       uses: actions/upload-artifact@v4

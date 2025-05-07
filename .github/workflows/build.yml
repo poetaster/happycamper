@@ -26,6 +26,7 @@ jobs:
       with:
         release: ${{ env.RELEASE }}
         arch: i486
+        suffix: "-486"
       
     - name: Upload build result
       uses: actions/upload-artifact@v4

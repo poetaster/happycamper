@@ -4,6 +4,7 @@ Name:       harbour-happycamper
 %define _binary_payload w2.xzdio
 %define __provides_exclude_from ^%{_datadir}/%{name}/lib/.*\\.so\\>
 %define __requires_exclude_from ^%{_datadir}/%{name}/lib/.*\\.so\\>
+%define __requires_exclude ^libc|libdl|libm|libpthread|libpython3.8m|libpython3.8m|python|env|libutil.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}

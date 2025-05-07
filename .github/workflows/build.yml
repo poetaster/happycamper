@@ -20,7 +20,7 @@ jobs:
     - name: Prepare
       run: mkdir output
 
-    - name: Build aarch64
+    - name: Build noarch
       id: build_aarch64
       uses: coderus/github-sfos-build@sfos5
       with:

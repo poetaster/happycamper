@@ -7,8 +7,7 @@ import Nemo.DBus 2.0
 Page {
     id: mainpage
     property alias notification: popup
-    property string musicPath: StandardPaths.writableLocation(StandardPaths.MusicLocation)
-
+    property string musicPath: StandardPaths.music
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 

@@ -76,7 +76,7 @@ Url:
 %endif
 
 # >> build post
-# << build post
+# << build post%qtc_qmake5
 
 %install
 rm -rf %{buildroot}

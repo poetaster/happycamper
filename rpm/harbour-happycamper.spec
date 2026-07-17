@@ -12,7 +12,7 @@ Name:       harbour-happycamper
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Happy Camper Bandcamp Downloader.
-Version:    0.1.7
+Version:    0.1.8
 Release:    1
 License:    GPLv3
 BuildArch:  noarch

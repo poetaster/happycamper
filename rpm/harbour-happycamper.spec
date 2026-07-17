@@ -72,7 +72,7 @@ Url:
 %qtc_qmake5
 %qtc_make %{?_smp_mflags}
 %else
- HARBOUR_STORE=1 MB2_QMAKE_ARGS='CONFIG+=harbour_store' %qtc_make %{?_smp_mflags} QMAKE_ARGS='CONFIG+=harbour_store' 'CONFIG+=harbour_store'
+ HARBOUR_STORE=1 MB2_QMAKE_ARGS='CONFIG+=harbour_store' %qtc_qmake5 %{?_smp_mflags} QMAKE_ARGS='CONFIG+=harbour_store' 'CONFIG+=harbour_store'
 %endif
 
 # >> build post

@@ -1,0 +1,4 @@
+[D-BUS Service]
+Interface=/de/poetaster/harbour/happycamper
+Name=de.poetaster.happycamper
+Exec=/usr/bin/harbour-happycamper

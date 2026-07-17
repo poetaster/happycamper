@@ -103,11 +103,6 @@ cd %{buildroot}/%{_datadir}/%{name}/lib/campdown
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
 rm -rf %{buildroot}/%{_datadir}/%{name}/lib/campdown
 
-rm -rf %{buildroot}/%{_datadir}/%{name}/share
-rm -rf %{buildroot}/%{_datadir}/%{name}/bin
-
-cd %_builddir
-
 
 %files
 # >> files
@@ -117,7 +112,7 @@ cd %_builddir
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %if "%{?vendor}" == "chum"
-%{_datadir}/applications/harbour-happycamper-open-url.desktop
 %{_datadir}/dbus-1/services/de.poetaster.happycamper.service
+%{_datadir}/applications/harbour-happycamper-open-url.desktop
 %endif
 # << files

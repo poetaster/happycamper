@@ -35,7 +35,7 @@ harbour_store {
   INSTALLS += desktop2
 
 # extra service file for dbus
-  service.path = /usr/share/dbus-1/services
+  service.path = /usr/share/dbus-1/services/
   serivce.files = de.poetaster.happycamper.service
   INSTALLS += service
 }

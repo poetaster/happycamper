@@ -113,7 +113,7 @@ cd %_builddir
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %if "%{?vendor}" == "chum"
-%{_datadir}/applications/%{name}%{name}-open-url.desktop
+%{_datadir}/applications/%{name}-open-url.desktop
 %{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 %endif
 # << files

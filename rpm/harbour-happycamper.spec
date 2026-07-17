@@ -2,9 +2,8 @@ Name:       harbour-happycamper
 
 # >> macros
 %define _binary_payload w2.xzdio
-%define __provides_exclude_from ^%{_datadir}/%{name}/lib/.*\\.so\\>
-%define __requires_exclude_from ^%{_datadir}/%{name}/lib/.*\\.so\\>
-%define __requires_exclude ^libc|libdl|libm|libpthread|libpython3.8m|libpython3.8m|python|env|libutil.*$
+%define __provides_exclude_from ^%{_datadir}/%{name}/lib/*
+%define __requires_exclude ^python3-urllib3|python3-mutagen|python3-requests$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -69,9 +68,12 @@ Url:
 # >> build pre
 # << build pre
 
+%if "%{?vendor}" == "chum"
 %qtc_qmake5
-
 %qtc_make %{?_smp_mflags}
+%else
+ HARBOUR_STORE=1 MB2_QMAKE_ARGS='CONFIG+=harbour_store' %qtc_make %{?_smp_mflags} QMAKE_ARGS='CONFIG+=harbour_store' 'CONFIG+=harbour_store'
+%endif
 
 # >> build post
 # << build post
@@ -87,7 +89,7 @@ rm -rf %{buildroot}
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
-   %{buildroot}%{_datadir}/applications/*.desktop
+   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
@@ -109,6 +111,9 @@ cd %_builddir
 %defattr(0644,root,root,-)
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
-%{_datadir}/applications/%{name}*.desktop
-#%{_datadir}/dbus-1/services/de.poetaster.happycamper.service
+%{_datadir}/applications/%{name}.desktop
+%if "%{?vendor}" == "chum"
+%{_datadir}/applications/%{name}%{name}-open-url.desktop
+%{_datadir}/dbus-1/services/de.poetaster.happycamper.service
+%endif
 # << files

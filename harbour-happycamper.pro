@@ -23,8 +23,23 @@ DISTFILES += qml/harbour-happycamper.qml \
     rpm/harbour-happycamper.changes.run.in \
     rpm/harbour-happycamper.spec \
     translations/*.ts \
-    harbour-happycamper.desktop \
-    harbour-happycamper-open-url.desktop
+    harbour-happycamper.desktop
+
+harbour_store {
+  message("Yup store")
+} else {
+
+  DISTFILES+=harbour-happycamper-open-url.desktop
+  # extra desktop file for dbus
+  desktop2.path += /usr/share/applications
+  desktop2.files = $${TARGET}-open-url.desktop
+  INSTALLS += desktop2
+
+# extra service file for dbus
+  service.path = /usr/share/dbus-1/services
+  serivce.files = de.poetaster.happycamper.service
+  INSTALLS += service
+}
 
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
@@ -32,18 +47,6 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 libs.path = /usr/share/$${TARGET}
 libs.files = lib
 INSTALLS += libs
-
-# extra desktop file for dbus
-desktop2.path += /usr/share/applications
-desktop2.files = $${TARGET}-open-url.desktop
-
-INSTALLS += desktop2
-
-# extra service file for dbus
-service.path = /usr/share/dbus-1/services
-serivce.files = de.poetaster.happycamper.service
-
-INSTALLS += service
 
 # to disable building translations every time, comment out the
 # following CONFIG line

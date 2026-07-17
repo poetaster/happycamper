@@ -29,7 +29,6 @@ harbour_store {
   message("Yup store")
 } else {
 
-  DISTFILES+=harbour-happycamper-open-url.desktop
   # extra desktop file for dbus
   desktop2.path += /usr/share/applications
   desktop2.files = $${TARGET}-open-url.desktop

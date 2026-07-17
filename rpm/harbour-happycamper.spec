@@ -89,7 +89,7 @@ rm -rf %{buildroot}
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
-   %{buildroot}%{_datadir}/applications/%{name}.desktop
+   %{buildroot}%{_datadir}/applications/harbour-happycamper.desktop
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
@@ -113,7 +113,7 @@ cd %_builddir
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
 %if "%{?vendor}" == "chum"
-%{_datadir}/applications/%{name}-open-url.desktop
+%{_datadir}/applications/harbour-happycamper-open-url.desktop
 %{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 %endif
 # << files

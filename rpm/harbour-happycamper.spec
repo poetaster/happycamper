@@ -68,9 +68,9 @@ Url:
 # >> build pre
 # << build pre
 
+
 %if "%{?vendor}" == "chum"
-%qtc_qmake5
-%qtc_make %{?_smp_mflags}
+ %qmake5 VERSION=%{version} RELEASE=%{release}
 %else
  HARBOUR_STORE=1 MB2_QMAKE_ARGS='CONFIG+=harbour_store' %qmake5 QMAKE_ARGS='CONFIG+=harbour_store' 'CONFIG+=harbour_store'
 %endif

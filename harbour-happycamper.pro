@@ -25,9 +25,6 @@ DISTFILES += qml/harbour-happycamper.qml \
     translations/*.ts \
     harbour-happycamper.desktop
 
-harbour_store {
-  message("Yup store")
-} else {
 
   # extra desktop file for dbus
   desktop2.path += /usr/share/applications
@@ -38,7 +35,6 @@ harbour_store {
   service.path = /usr/share/dbus-1/services/
   service.files = de.poetaster.happycamper.service
   INSTALLS += service
-}
 
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172

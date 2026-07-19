@@ -68,15 +68,12 @@ Url:
 # >> build pre
 # << build pre
 
+%qtc_qmake5
 
-%if "%{?vendor}" == "chum"
- %qmake5 VERSION=%{version} RELEASE=%{release}
-%else
- HARBOUR_STORE=1 MB2_QMAKE_ARGS='CONFIG+=harbour_store' %qmake5 QMAKE_ARGS='CONFIG+=harbour_store' 'CONFIG+=harbour_store'
-%endif
+%qtc_make %{?_smp_mflags}
 
 # >> build post
-# << build post%qtc_qmake5
+# << build post
 
 %install
 rm -rf %{buildroot}
@@ -91,11 +88,6 @@ desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/harbour-happycamper.desktop
 
-%if "%{?vendor}" != "chum"
-rm -rf %{buildroot}/%{_datadir}/applications/harbour-happycamper-open-url.desktop
-rm -rf %{buildroot}/%{_datadir}/applications/de.poetaster.happycamper.service
-%endif
-
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt
 python3 setup.py install --root=%{buildroot} --prefix=%{_datadir}/%{name}/
 rm -rf %{buildroot}/%{_datadir}/%{name}/lib/docopt
@@ -108,12 +100,9 @@ rm -rf %{buildroot}/%{_datadir}/%{name}/lib/campdown
 %files
 # >> files
 %defattr(-,root,root,-)
-%defattr(0644,root,root,-)
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
-%if "%{?vendor}" == "chum"
 %{_datadir}/dbus-1/services/de.poetaster.happycamper.service
 %{_datadir}/applications/harbour-happycamper-open-url.desktop
-%endif
 # << files

@@ -93,6 +93,7 @@ desktop-file-install --delete-original       \
 
 %if "%{?vendor}" != "chum"
 rm -rf %{buildroot}/%{_datadir}/applications/harbour-happycamper-open-url.desktop
+rm -rf %{buildroot}/%{_datadir}/applications/de.poetaster.happycamper.service
 %endif
 
 cd %{buildroot}/%{_datadir}/%{name}/lib/docopt

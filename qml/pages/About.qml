@@ -70,7 +70,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text:  qsTr(" © 2023-2024 Mark Washeim")
+            text:  qsTr(" © 2023-2026 Mark Washeim")
         }
 
         Item {

@@ -86,6 +86,7 @@ Page {
             anchors.fill: parent
             /* This will probably be required from 4.4 on. */
             Component.onCompleted: {
+                WebEngineSettings.pixelRatio = 3
                 //WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
                 //WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
             }
